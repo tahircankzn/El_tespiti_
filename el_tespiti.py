@@ -2,13 +2,10 @@ import cv2
 import mediapipe as mp
 import numpy as  np
 
-
-
     
 mp_drawing = mp.solutions.drawing_utils
 mp_drawing_styles = mp.solutions.drawing_styles
 mp_hands = mp.solutions.hands
-
 
 
 finger_x =np.arange(0.1,0.9,0.00140625)
@@ -37,9 +34,6 @@ y11 = [1]
 x22 = [1]
 y22 = [1]
 
-# roket için
-y_16 = [0]
-y_0 = [0]
 
 # For webcam input:
 cap = cv2.VideoCapture(0)
@@ -92,17 +86,8 @@ with mp_hands.Hands(
             mp_hands.HAND_CONNECTIONS,
             mp_drawing_styles.get_default_hand_landmarks_style(),
             mp_drawing_styles.get_default_hand_connections_style())
-      #print(results.multi_hand_landmarks[0].landmark[0].x) # önemli keşif
-      #if len(results.multi_hand_landmarks) == 21:
-        #print("oldu")
-        #image = cv2.line(image, (results.multi_hand_landmarks[0].landmark[0].x ,results.multi_hand_landmarks[0].landmark[0].y), (results.multi_hand_landmarks[8].landmark[0].x ,results.multi_hand_landmarks[8].landmark[0].y), (0, 255, 0), thickness=2)
-    # Flip the image horizontally for a selfie-view display.
-    #image = cv2.line(image, results.multi_hand_landmarks[4], results.multi_hand_landmarks[8], (0, 255, 0), 9)
-    #cv2.rectangle(image , (results.multi_hand_landmarks[4]["x"],results.multi_hand_landmarks[4][1]), (results.multi_hand_landmarks[8][0],results.multi_hand_landmarks[8][1]),(0, 255, 0), 2)
-    
+      
 
-
-        
     
         # y1
         for i in finger_y:
@@ -151,40 +136,17 @@ with mp_hands.Hands(
             break
         index = finger_y.index(d[0])
         x22.clear()
-        x22.append(screen_y[index])
-
-        # rocket 0 16
-        
-        for i in finger_y: # 16
-          if y16 >= i:
-            y_16.clear()
-            y_16.append(i)
-          else:
-            break
-
-        for i in finger_y: # 16
-          if y0 >= i:
-            y_0.clear()
-            y_0.append(i)
-          else:
-            break
-
+        x22.append(screen_y[index])       
         
     else:
         x11 = [1]
         y11 = [1]
         x22 = [1]
         y22 = [1]
-        pass
-    
-    
-    
+        pass  
     
 
     image = cv2.line(image, (x11[0]+100 ,y11[0]), (x22[0]+100 ,y22[0]+50), (0, 0, 255), thickness=2)
-
-    
-
 
     cv2.imshow('MediaPipe Hands', cv2.flip(image, 1))
     cv2.resizeWindow("MediaPipe Hands", 640, 480)
