@@ -10,8 +10,8 @@ mp_hands = mp.solutions.hands
 
 finger_x =np.arange(0.1,0.9,0.00140625)
 finger_x = finger_x.tolist()
-screen_x = np.arange(1,640,1)
-
+screen_x = np.arange(1,640,1)                  # el tespitinden gelen kordinat bilgisi 0 - 9 arasında bir değere dönüştürülmesi sağlandı
+                                               # böylece istenilen 2 parmak eklemi arasındaki mesafe ölçülmesi ve çizgi çizilmesi sağlandı
 finger_y =np.arange(0.1,0.9,0.001875)
 finger_y = finger_y.tolist()
 screen_y = np.arange(1,480,1)
